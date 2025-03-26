@@ -20,5 +20,15 @@ public class MainController {
     public String shop() {
         return "shop";
     }
+
+    @GetMapping("/shopsingle")
+    public String shopsingle() { return "shop-single";
+    }
+
+    @GetMapping("/contact")
+    public String contact() {
+        return "contact";
+    }
+
 }
 
