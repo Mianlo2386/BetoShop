@@ -11,6 +11,11 @@ public class MainController {
         return "index";
     }
 
+    @GetMapping("/about")
+    public String about() {
+        return "about";
+    }
+
     @GetMapping("/shop")
     public String shop() {
         return "shop";
