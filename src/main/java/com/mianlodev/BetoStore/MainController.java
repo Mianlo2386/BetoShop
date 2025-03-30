@@ -4,11 +4,12 @@ import org.springframework.beans.factory.annotation.Value;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
 import org.springframework.web.bind.annotation.GetMapping;
+import org.springframework.web.bind.annotation.ResponseBody;
 
 @Controller
 public class MainController {
 
-    @Value("${GOOGLE_MAPS_API}") // Obtiene la clave de la variable de entorno
+    @Value("${GOOGLE_MAPS_API}")
     private String googleMapsApiKey;
 
     @GetMapping("/")
@@ -27,6 +28,7 @@ public class MainController {
     }
 
     @GetMapping("/shopsingle")
+
     public String shopsingle() {
         return "shop-single";
     }
