@@ -4,7 +4,6 @@ import org.springframework.beans.factory.annotation.Value;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
 import org.springframework.web.bind.annotation.GetMapping;
-import org.springframework.web.bind.annotation.ResponseBody;
 
 @Controller
 public class MainController {
@@ -22,13 +21,7 @@ public class MainController {
         return "about";
     }
 
-    @GetMapping("/shop")
-    public String shop() {
-        return "shop";
-    }
-
     @GetMapping("/shopsingle")
-
     public String shopsingle() {
         return "shop-single";
     }
