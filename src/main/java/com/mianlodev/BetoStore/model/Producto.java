@@ -11,6 +11,9 @@ import lombok.Setter;
 import lombok.NoArgsConstructor;
 import lombok.AllArgsConstructor;
 
+import java.util.Arrays;
+import java.util.List;
+
 @Entity
 @Table(name = "products") // Mapeo para la tabla
 @Getter
@@ -40,4 +43,13 @@ public class Producto {
 
     @Column(name = "subcategory")
     private String subcategoria;
+
+    public List<String> getImagenes() {
+        return Arrays.asList(
+                this.imagenUrl, // Imagen principal del producto
+                "https://i.imgur.com/MfJDP86.png", // Imagen secundaria
+                "https://i.imgur.com/G7oeG49.png"  // Imagen adicional
+        );
+    }
+
 }
