@@ -1,11 +1,6 @@
 package com.mianlodev.BetoStore.model;
 
-import jakarta.persistence.Entity;
-import jakarta.persistence.GeneratedValue;
-import jakarta.persistence.GenerationType;
-import jakarta.persistence.Id;
-import jakarta.persistence.Column;
-import jakarta.persistence.Table;
+import jakarta.persistence.*;
 import lombok.Getter;
 import lombok.Setter;
 import lombok.NoArgsConstructor;
@@ -45,11 +40,12 @@ public class Producto {
     private String subcategoria;
 
     public List<String> getImagenes() {
-        return Arrays.asList(
-                this.imagenUrl, // Imagen principal del producto
-                "https://i.imgur.com/MfJDP86.png", // Imagen secundaria
-                "https://i.imgur.com/G7oeG49.png"  // Imagen adicional
-        );
+        return imagenes.stream()
+                .map(ProductImage::getImageUrl)
+                .toList(); // Devuelve solo las URLs
     }
+
+    @OneToMany(mappedBy = "producto", cascade = CascadeType.ALL)
+    private List<ProductImage> imagenes;
 
 }

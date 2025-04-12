@@ -25,40 +25,22 @@
                     <img class="card-img img-fluid" th:src="${producto.imagenUrl}" alt="Imagen principal del producto" id="product-detail">
                 </div>
                 <div class="row">
-                    <!-- Controls del carrusel -->
+                    <!-- Flecha izquierda -->
                     <div class="col-1 align-self-center">
                         <a href="#multi-item-example" role="button" data-bs-slide="prev">
                             <i class="text-dark fas fa-chevron-left"></i>
                             <span class="sr-only">Previo</span>
                         </a>
                     </div>
+
+                    <!-- Contenedor del carrusel -->
                     <div id="multi-item-example" class="col-10 carousel slide carousel-multi-item" data-bs-ride="carousel">
                         <div class="carousel-inner product-links-wap" role="listbox">
-                            <!-- Imagen principal repetida -->
-                            <div class="carousel-item active">
+                            <div th:each="i : ${#numbers.sequence(0, imagenes.size() - 1, 3)}" class="carousel-item" th:classappend="${i == 0} ? 'active'">
                                 <div class="row">
-                                    <div class="col-4">
+                                    <div class="col-4" th:each="j : ${#numbers.sequence(i, i + 2)}" th:if="${j < imagenes.size()}">
                                         <a href="#">
-                                            <img class="card-img img-fluid" th:src="${producto.imagenUrl}" alt="Imagen del producto">
-                                        </a>
-                                    </div>
-                                </div>
-                            </div>
-                            <div class="carousel-item">
-                                <div class="row">
-                                    <div class="col-4">
-                                        <a href="#">
-                                            <img class="card-img img-fluid" th:src="${producto.imagenUrl}" alt="Imagen del producto">
-                                        </a>
-                                    </div>
-                                </div>
-                            </div>
-                            <div class="carousel-item">
-                                <div class="row">
-                                    <div class="col-4">
-                                        <a href="#">
-                                            <img class="card-img img-fluid" th:src="${producto.imagenUrl != null ? producto.imagenUrl : '/ruta/a/imagen-predeterminada.png'}" alt="Imagen principal del producto" id="product-carousel-detail">
-
+                                            <img class="card-img img-fluid" th:src="${imagenes[j]}" alt="Imagen relacionada">
                                         </a>
                                     </div>
                                 </div>
@@ -66,6 +48,13 @@
                         </div>
                     </div>
 
+                    <!-- Flecha derecha -->
+                    <div class="col-1 align-self-center">
+                        <a href="#multi-item-example" role="button" data-bs-slide="next">
+                            <i class="text-dark fas fa-chevron-right"></i>
+                            <span class="sr-only">Siguiente</span>
+                        </a>
+                    </div>
                 </div>
             </div>
 
@@ -106,9 +95,9 @@
     </div>
 </section>
 <!-- Close Content -->
-<div th:insert="~{fragments/related-products :: related-products}"></div>
+<!--<div th:insert="~{fragments/related-products :: related-products}"></div>-->
 
-<!--<div th:insert="~{fragments/footer :: footer}"></div>-->
+<div th:insert="~{fragments/footer :: footer}"></div>
 
 <!-- Scripts -->
 <script th:src="@{/assets/js/jquery-1.11.0.min.js}"></script>

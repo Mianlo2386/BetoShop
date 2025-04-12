@@ -22,16 +22,11 @@ public class ShopSingleController {
             throw new RuntimeException("Producto no encontrado");
         }
 
-        // Imprime los datos del producto para depuración
-        System.out.println("Producto: " + producto);
-        System.out.println("Imágenes: " + producto.getImagenes());
-        System.out.println("Descripción del producto: " + producto.getDescripcion()); // Aquí verificas la descripción
-
         model.addAttribute("producto", producto);
-        model.addAttribute("imagenes", producto.getImagenes());
-
+        model.addAttribute("imagenes", producto.getImagenes()); // Pasa las imágenes relacionadas
         return "shop-single";
     }
+
 
 
 
