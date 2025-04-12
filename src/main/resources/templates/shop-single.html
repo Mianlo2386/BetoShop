@@ -68,6 +68,8 @@
                         <!-- Descripción del producto -->
                         <h6>Descripción:</h6>
                         <p th:text="${producto.descripcion != null ? producto.descripcion : 'Descripción no disponible'}"></p>
+                        <h6>Especificaciones:</h6>
+                        <p th:text="${producto.especificaciones != null ? producto.especificaciones : 'Especificaciones no disponibles'}"></p>
                         <!-- Categoría -->
                         <ul class="list-inline">
                             <li class="list-inline-item">

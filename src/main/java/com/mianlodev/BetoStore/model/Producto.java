@@ -33,6 +33,9 @@ public class Producto {
     @Column(name = "image_url")
     private String imagenUrl;
 
+    @Column(name = "specifications", columnDefinition = "TEXT")
+    private String especificaciones;
+
     @Column(name = "category")
     private String categoria;
 
