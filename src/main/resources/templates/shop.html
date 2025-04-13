@@ -108,9 +108,20 @@
                                 </div>
                             </div>
                             <div class="card-body">
-                                <a th:href="@{/shopsingle/{id}(id=${producto.id})}" class="h3 text-decoration-none" th:text="${producto.nombre}"></a>
+                                <!-- Nombre del producto en gris oscuro -->
+                                <a th:href="@{/shopsingle/{id}(id=${producto.id})}" class="h3 text-decoration-none" style="color: #343a40;" th:text="${producto.nombre}"></a>
+
+                                <!-- Descripción del producto -->
                                 <p class="text-muted" th:text="${producto.descripcion}"></p>
-                                <p class="text-center text-primary font-weight-bold" th:text="'$' + ${producto.precio}"></p>
+
+                                <!-- Precio en gris oscuro -->
+                                <p class="text-center font-weight-bold" style="color: #343a40;" th:text="'$' + ${producto.precio}"></p>
+
+                                <!-- Estrellas de valoración centradas debajo del precio -->
+                                <p class="text-center py-2">
+                                    <i th:each="i : ${#numbers.sequence(1, producto.stars)}" class="fa fa-star text-warning"></i>
+                                    <i th:each="i : ${#numbers.sequence(1, 5 - producto.stars)}" class="fa fa-star text-secondary"></i>
+                                </p>
                             </div>
                         </div>
                     </div>
