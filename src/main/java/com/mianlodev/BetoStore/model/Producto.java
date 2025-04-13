@@ -42,6 +42,14 @@ public class Producto {
     @Column(name = "subcategory")
     private String subcategoria;
 
+    // Nueva columna size
+    @Column(name = "size", columnDefinition = "TEXT")
+    private String size;
+
+    // Nueva columna stars
+    @Column(name = "stars")
+    private int stars;
+
     public List<String> getImagenes() {
         return imagenes.stream()
                 .map(ProductImage::getImageUrl)
@@ -50,5 +58,4 @@ public class Producto {
 
     @OneToMany(mappedBy = "producto", cascade = CascadeType.ALL)
     private List<ProductImage> imagenes;
-
 }

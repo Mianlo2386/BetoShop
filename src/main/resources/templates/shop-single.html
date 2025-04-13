@@ -65,6 +65,13 @@
                         <h1 class="h2" th:text="${producto.nombre}"></h1>
                         <!-- Precio del producto -->
                         <p class="h3 py-2" th:text="'$' + ${producto.precio}"></p>
+                        <h6>Valoración:</h6>
+                        <p class="py-2">
+                            <i th:each="i : ${#numbers.sequence(1, producto.stars)}" class="fa fa-star text-warning"></i>
+                            <i th:each="i : ${#numbers.sequence(1, 5 - producto.stars)}" class="fa fa-star text-secondary"></i>
+                            <span class="list-inline-item text-dark" ></span>
+                        </p>
+
                         <!-- Descripción del producto -->
                         <h6>Descripción:</h6>
                         <p th:text="${producto.descripcion != null ? producto.descripcion : 'Descripción no disponible'}"></p>

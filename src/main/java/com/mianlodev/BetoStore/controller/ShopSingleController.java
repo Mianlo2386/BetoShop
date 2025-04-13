@@ -21,6 +21,7 @@ public class ShopSingleController {
         if (producto == null) {
             throw new RuntimeException("Producto no encontrado");
         }
+        System.out.println("Stars del producto: " + producto.getStars());
 
         model.addAttribute("producto", producto);
         model.addAttribute("imagenes", producto.getImagenes()); // Pasa las imágenes relacionadas
