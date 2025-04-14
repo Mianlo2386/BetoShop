@@ -68,8 +68,11 @@
                             <p class="h3 py-2" th:text="'$' + ${producto.precio}"></p>
                             <h6>Valoración:</h6>
                             <p class="py-2">
+                                <!-- Estrellas amarillas -->
                                 <i th:each="i : ${#numbers.sequence(1, producto.stars)}" class="fa fa-star text-warning"></i>
-                                <i th:each="i : ${#numbers.sequence(1, 5 - producto.stars)}" class="fa fa-star text-secondary"></i>
+                                <!-- Estrellas grises -->
+                                <i th:each="i : ${#numbers.sequence(1, 5 - producto.stars)}"
+                                   th:if="${producto.stars < 5}" class="fa fa-star text-secondary"></i>
                             </p>
 
                             <!-- Descripción del producto -->

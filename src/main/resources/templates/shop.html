@@ -108,19 +108,22 @@
                                 </div>
                             </div>
                             <div class="card-body">
-                                <!-- Nombre del producto en gris oscuro (Bootstrap text-dark) -->
-                                <a th:href="@{/shopsingle/{id}(id=${producto.id})}" class="h3 text-decoration-none text-dark" th:text="${producto.nombre}"></a>
+                                <!-- Nombre del producto con separación -->
+                                <a th:href="@{/shopsingle/{id}(id=${producto.id})}"
+                                   class="h3 text-decoration-none text-dark font-weight-bold mb-3 d-block"
+                                   th:text="${producto.nombre}"></a>
 
                                 <!-- Descripción del producto -->
-                                <p class="text-muted" th:text="${producto.descripcion}"></p>
+                                <p class="text-dark" th:text="${producto.descripcion}"></p>
 
-                                <!-- Precio con color gris oscuro -->
+                                <!-- Precio del producto -->
                                 <p class="text-center font-weight-bold text-dark" th:text="'$' + ${producto.precio}"></p>
 
-                                <!-- Estrellas de valoración centradas debajo del precio -->
+                                <!-- Estrellas de valoración -->
                                 <p class="text-center py-2">
                                     <i th:each="i : ${#numbers.sequence(1, producto.stars)}" class="fa fa-star text-warning"></i>
-                                    <i th:each="i : ${#numbers.sequence(1, 5 - producto.stars)}" class="fa fa-star text-secondary"></i>
+                                    <i th:each="i : ${#numbers.sequence(1, 5 - producto.stars)}"
+                                       th:if="${producto.stars < 5}" class="fa fa-star text-secondary"></i>
                                 </p>
                             </div>
                         </div>
