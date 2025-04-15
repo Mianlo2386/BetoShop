@@ -9,10 +9,8 @@
         <!-- Bootstrap CSS -->
         <link rel="stylesheet" th:href="@{/assets/css/bootstrap.min.css}">
 
-        <!-- Leaflet CSS -->
-        <link rel="stylesheet" href="https://unpkg.com/leaflet@1.7.1/dist/leaflet.css"
-              integrity="sha512-RksmISXOrC0B7aB5OhBoXgM3Lc4U4oSoG95Ye1EunChD0CJrX/m68z0Rd6tXtOa8g+H2QJISJxMZZ6jZ7Dg=="
-              crossorigin=""/>
+        <!-- Leaflet CSS (sin integrity para evitar errores) -->
+        <link rel="stylesheet" href="https://unpkg.com/leaflet@1.7.1/dist/leaflet.css" crossorigin="anonymous"/>
 
         <!-- Estilos personalizados -->
         <link rel="stylesheet" th:href="@{/assets/css/templatemo.css}">
@@ -23,4 +21,8 @@
 
         <!-- Font Awesome desde CDN -->
         <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.5.1/css/all.min.css">
+
+        <!-- Slick desde CDN -->
+        <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/slick-carousel/1.8.1/slick.min.css">
+        <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/slick-carousel/1.8.1/slick-theme.min.css">
 </head>
