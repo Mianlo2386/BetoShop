@@ -1,150 +1,105 @@
 <!DOCTYPE html>
 <html lang="en" xmlns:th="http://www.w3.org/1999/xhtml">
-
-<div th:insert="~{fragments/head :: head}"></div>
-
+<head th:insert="~{fragments/head :: head}"></head>
 <body>
 
-    <div th:insert="~{fragments/navbar :: navbar}"></div>
+<div th:insert="~{fragments/navbar :: navbar}"></div>
 
-    <div th:insert="~{fragments/header :: header}"></div>
+<div th:insert="~{fragments/header :: header}"></div>
 
-    <div th:insert="~{fragments/modal :: modal}"></div>
+<div th:insert="~{fragments/modal :: modal}"></div>
 
+<!-- Start Content -->
+<div class="container py-5">
+    <div class="row">
 
-
-    <!-- Start Content -->
-    <div class="container py-5">
-        <div class="row">
-
-            <div class="col-lg-3">
-                <h1 class="h2 pb-4">Categorias</h1>
-                <ul class="list-unstyled templatemo-accordion">
-                    <li class="pb-3">
-                        <a class="collapsed d-flex justify-content-between h3 text-decoration-none" href="#">
-                            Cuadros
-                            <i class="fa fa-fw fa-chevron-circle-down mt-1"></i>
-                        </a>
-                        <ul class="collapse show list-unstyled pl-3">
-                            <li><a class="text-decoration-none" href="#">Regular</a></li>
-                            <li><a class="text-decoration-none" href="#">Tríptico</a></li>
-                        </ul>
-                    </li>
-                    <li class="pb-3">
-                        <a class="collapsed d-flex justify-content-between h3 text-decoration-none" href="#">
-                            Venta
-                            <i class="pull-right fa fa-fw fa-chevron-circle-down mt-1"></i>
-                        </a>
-                        <ul id="collapseTwo" class="collapse list-unstyled pl-3">
-                            <li><a class="text-decoration-none" href="#">Llaveros</a></li>
-                            <li><a class="text-decoration-none" href="#">Accesorios</a></li>
-                        </ul>
-                    </li>
-                    <li class="pb-3">
-                        <a class="collapsed d-flex justify-content-between h3 text-decoration-none" href="#">
-                            Producto
-                            <i class="pull-right fa fa-fw fa-chevron-circle-down mt-1"></i>
-                        </a>
-                        <ul id="collapseThree" class="collapse list-unstyled pl-3">
-                            <li><a class="text-decoration-none" href="#">Bolsa sorpresa</a></li>
-                            <li><a class="text-decoration-none" href="#">Tablas de corte</a></li>
-                            <li><a class="text-decoration-none" href="#">Muñecos</a></li>
-                        </ul>
-                    </li>
-                </ul>
-            </div>
-
-            <div class="col-lg-9">
-                <!-- Filtros y categorías -->
-                <div class="row">
-                    <div class="col-md-6">
-                        <ul class="list-inline shop-top-menu pb-3 pt-1">
-                            <li class="list-inline-item">
-                                <a class="h3 text-dark text-decoration-none mr-3" href="#">Todo</a>
-                            </li>
-                            <li class="list-inline-item">
-                                <a class="h3 text-dark text-decoration-none mr-3" href="#">Cuadros</a>
-                            </li>
-                            <li class="list-inline-item">
-                                <a class="h3 text-dark text-decoration-none" href="#">Accesorios</a>
-                            </li>
-                        </ul>
-                    </div>
-                    <div class="col-md-6 pb-4">
-                        <div class="d-flex">
-                            <select class="form-control">
-                                <option>Destacado</option>
-                                <option>A to Z</option>
-                                <option>Item</option>
-                            </select>
-                        </div>
-                    </div>
-                </div>
-
-                <!-- Productos dinámicos -->
-                <div class="row">
-                    <div th:each="producto : ${productos}" class="col-md-4 d-flex align-items-stretch">
-                        <div class="card mb-4 product-wap rounded-0">
-                            <div class="card rounded-0">
-                                <img class="card-img rounded-0 img-fluid" th:src="${producto.imagenUrl}" alt="Imagen producto">
-                                <div class="card-img-overlay rounded-0 product-overlay d-flex align-items-center justify-content-center">
-                                    <ul class="list-unstyled">
-                                        <li>
-                                            <a class="btn btn-success text-white" th:href="@{/shopsingle/{id}(id=${producto.id})}">
-                                                <i class="far fa-heart"></i>
-                                            </a>
-                                        </li>
-                                        <li>
-                                            <a class="btn btn-success text-white mt-2" th:href="@{/shopsingle/{id}(id=${producto.id})}">
-                                                <i class="far fa-eye"></i>
-                                            </a>
-                                        </li>
-                                        <li>
-                                            <a class="btn btn-success text-white mt-2" th:href="@{/shopsingle/{id}(id=${producto.id})}">
-                                                <i class="fas fa-cart-plus"></i>
-                                            </a>
-                                        </li>
-                                    </ul>
-                                </div>
-                            </div>
-                            <div class="card-body">
-                                <!-- Nombre del producto con color verde y espacio adicional -->
-                                <a th:href="@{/shopsingle/{id}(id=${producto.id})}"
-                                   class="h2 text-decoration-none text-success mb-3 d-block"
-                                   th:text="${producto.nombre}"></a>
-
-                                <!-- Descripción del producto -->
-                                <p class="text-dark" th:text="${producto.descripcion}"></p>
-
-                                <!-- Precio del producto -->
-                                <p class="text-center font-weight-bold text-dark" th:text="'$' + ${producto.precio}"></p>
-
-                                <!-- Estrellas de valoración -->
-                                <p class="text-center py-2">
-                                    <i th:each="i : ${#numbers.sequence(1, producto.stars)}" class="fa fa-star text-warning"></i>
-                                    <i th:each="i : ${#numbers.sequence(1, 5 - producto.stars)}"
-                                       th:if="${producto.stars < 5}" class="fa fa-star text-secondary"></i>
-                                </p>
-                            </div>
-                        </div>
-                    </div>
-                </div>
-            </div>
-
+        <!-- Categorías -->
+        <div class="col-lg-3">
+            <h1 class="h2 pb-4">Categorías</h1>
+            <ul class="list-unstyled templatemo-accordion">
+                <li class="pb-3">
+                    <a class="collapsed d-flex justify-content-between h3 text-decoration-none" href="#">
+                        Cuadros
+                        <i class="fa fa-fw fa-chevron-circle-down mt-1"></i>
+                    </a>
+                    <ul class="collapse show list-unstyled pl-3">
+                        <li><a class="text-decoration-none" href="#">Regular</a></li>
+                        <li><a class="text-decoration-none" href="#">Tríptico</a></li>
+                    </ul>
+                </li>
+                <!-- Agregar más categorías si es necesario -->
+            </ul>
         </div>
+
+        <!-- Productos y mensaje de búsqueda -->
+        <div class="col-lg-9">
+            <!-- Mensaje basado en la búsqueda -->
+            <h2 class="pb-3" th:text="${mensaje}"></h2>
+
+            <!-- Mostrar un mensaje si no hay productos -->
+            <div th:if="${productos.isEmpty()}">
+                <p class="text-muted">No se encontraron productos para la búsqueda.</p>
+            </div>
+
+            <!-- Productos dinámicos -->
+            <div class="row">
+                <div th:each="producto : ${productos}" class="col-md-4 d-flex align-items-stretch">
+                    <div class="card mb-4 product-wap rounded-0">
+                        <div class="card rounded-0">
+                            <img class="card-img rounded-0 img-fluid" th:src="${producto.imagenUrl}" alt="Imagen producto">
+                            <div class="card-img-overlay rounded-0 product-overlay d-flex align-items-center justify-content-center">
+                                <ul class="list-unstyled">
+                                    <li>
+                                        <a class="btn btn-success text-white" th:href="@{/shopsingle/{id}(id=${producto.id})}">
+                                            <i class="far fa-heart"></i>
+                                        </a>
+                                    </li>
+                                    <li>
+                                        <a class="btn btn-success text-white mt-2" th:href="@{/shopsingle/{id}(id=${producto.id})}">
+                                            <i class="far fa-eye"></i>
+                                        </a>
+                                    </li>
+                                    <li>
+                                        <a class="btn btn-success text-white mt-2" th:href="@{/shopsingle/{id}(id=${producto.id})}">
+                                            <i class="fas fa-cart-plus"></i>
+                                        </a>
+                                    </li>
+                                </ul>
+                            </div>
+                        </div>
+                        <div class="card-body">
+                            <!-- Nombre del producto -->
+                            <a th:href="@{/shopsingle/{id}(id=${producto.id})}" class="h2 text-decoration-none text-success mb-3 d-block" th:text="${producto.nombre}"></a>
+
+                            <!-- Descripción del producto -->
+                            <p class="text-dark" th:text="${producto.descripcion}"></p>
+
+                            <!-- Precio del producto -->
+                            <p class="text-center font-weight-bold text-dark" th:text="'$' + ${producto.precio}"></p>
+
+                            <!-- Valoración -->
+                            <p class="text-center py-2">
+                                <i th:each="i : ${#numbers.sequence(1, producto.stars)}" class="fa fa-star text-warning"></i>
+                                <i th:each="i : ${#numbers.sequence(1, 5 - producto.stars)}" th:if="${producto.stars < 5}" class="fa fa-star text-secondary"></i>
+                            </p>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+
     </div>
-    <!-- End Content -->
+</div>
+<!-- End Content -->
 
-    <div th:insert="~{fragments/footer :: footer}"></div>
+<div th:insert="~{fragments/footer :: footer}"></div>
 
-    <!-- Start Script -->
-
-    <script th:src="@{/assets/js/jquery-1.11.0.min.js}"></script>
-    <script th:src="@{/assets/js/jquery-migrate-1.2.1.min.js}"></script>
-    <script th:src="@{/assets/js/bootstrap.bundle.min.js}"></script>
-    <script th:src="@{/assets/js/templatemo.js}"></script>
-    <script th:src="@{/assets/js/custom.js}"></script>
-    <!-- End Script -->
+<!-- Start Script -->
+<script th:src="@{/assets/js/jquery-1.11.0.min.js}"></script>
+<script th:src="@{/assets/js/jquery-migrate-1.2.1.min.js}"></script>
+<script th:src="@{/assets/js/bootstrap.bundle.min.js}"></script>
+<script th:src="@{/assets/js/templatemo.js}"></script>
+<script th:src="@{/assets/js/custom.js}"></script>
+<!-- End Script -->
 </body>
-
 </html>

@@ -1,6 +1,7 @@
 package com.mianlodev.BetoStore.service;
 
 import com.mianlodev.BetoStore.model.Producto;
+
 import java.util.List;
 
 public interface ProductoService {
@@ -8,5 +9,6 @@ public interface ProductoService {
     Producto guardarProducto(Producto producto);
     Producto obtenerPorId(Long id);
     void eliminarPorId(Long id);
-}
 
+    List<Producto> buscarPorNombreOCategoriaOSubcategoria(String query);
+}

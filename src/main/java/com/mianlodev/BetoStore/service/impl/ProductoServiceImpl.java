@@ -33,4 +33,11 @@ public class ProductoServiceImpl implements ProductoService {
     public void eliminarPorId(Long id) {
         productoRepository.deleteById(id);
     }
+
+    @Override
+    public List<Producto> buscarPorNombreOCategoriaOSubcategoria(String query) {
+        return productoRepository.buscarPorNombreOCategoriaOSubcategoria(query);
+    }
+
+
 }
