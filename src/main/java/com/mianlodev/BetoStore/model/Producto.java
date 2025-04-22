@@ -6,6 +6,7 @@ import lombok.Setter;
 import lombok.NoArgsConstructor;
 import lombok.AllArgsConstructor;
 
+import java.util.ArrayList;
 import java.util.Arrays;
 import java.util.List;
 
@@ -57,5 +58,5 @@ public class Producto {
     }
 
     @OneToMany(mappedBy = "producto", cascade = CascadeType.ALL)
-    private List<ProductImage> imagenes;
+    private List<ProductImage> imagenes = new ArrayList<>();
 }
