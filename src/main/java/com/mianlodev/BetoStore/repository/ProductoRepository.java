@@ -17,4 +17,7 @@ public interface ProductoRepository extends JpaRepository<Producto, Long> {
     List<Producto> buscarPorNombreOCategoriaOSubcategoria(@Param("query") String query);
 
     List<Producto> findByCategoria(String categoria);
+
+    List<Producto> findByPrecioBetween(Double min, Double max);
+
 }

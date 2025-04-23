@@ -48,4 +48,9 @@ class ProductoRepositoryTest {
         List<Producto> productos = productoRepository.findByCategoria("Inexistente");
         assertTrue(productos.isEmpty(), "La consulta debería devolver una lista vacía para categorías inexistentes");
     }
+    @Test
+    void testBuscarProductoPorPrecioNegativo() {
+        List<Producto> productos = productoRepository.findByPrecioBetween(-100.0, 0.0);
+        assertTrue(productos.isEmpty(), "No deberían existir productos con precios negativos");
+    }
 }
