@@ -9,6 +9,8 @@ import org.springframework.boot.test.autoconfigure.orm.jpa.DataJpaTest;
 
 import java.util.List;
 
+import static org.junit.jupiter.api.Assertions.assertFalse;
+
 @DataJpaTest
 @AutoConfigureTestDatabase(replace = AutoConfigureTestDatabase.Replace.NONE)
 class ProductoRepositoryTest {
@@ -25,9 +27,19 @@ class ProductoRepositoryTest {
         List<Producto> productosEncontrados = productoRepository.findByCategoria(categoria);
 
         // Validar que el producto existe en la base de datos
-        Assertions.assertFalse(productosEncontrados.isEmpty(), "Debería haber productos en la categoría " + categoria);
+        assertFalse(productosEncontrados.isEmpty(), "Debería haber productos en la categoría " + categoria);
 
         // Opcionalmente validar el nombre del producto
         Assertions.assertEquals("Cuadro de Anime One Piece", productosEncontrados.get(0).getNombre());
+    }
+    @Test
+    void testProductoTieneImagenesAsociadas() {
+        Producto producto = productoRepository.findById(1L).orElseThrow();
+        assertFalse(producto.getImagenes().isEmpty(), "El producto debería tener imágenes asociadas");
+    }
+    @Test
+    void testEliminarProducto() {
+        productoRepository.deleteById(1L);
+        assertFalse(productoRepository.findById(1L).isPresent(), "El producto debería eliminarse correctamente");
     }
 }
