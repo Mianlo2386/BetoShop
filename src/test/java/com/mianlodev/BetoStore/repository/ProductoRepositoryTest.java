@@ -10,6 +10,7 @@ import org.springframework.boot.test.autoconfigure.orm.jpa.DataJpaTest;
 import java.util.List;
 
 import static org.junit.jupiter.api.Assertions.assertFalse;
+import static org.junit.jupiter.api.Assertions.assertTrue;
 
 @DataJpaTest
 @AutoConfigureTestDatabase(replace = AutoConfigureTestDatabase.Replace.NONE)
@@ -41,5 +42,10 @@ class ProductoRepositoryTest {
     void testEliminarProducto() {
         productoRepository.deleteById(1L);
         assertFalse(productoRepository.findById(1L).isPresent(), "El producto debería eliminarse correctamente");
+    }
+    @Test
+    void testBuscarProductoCategoriaInexistente() {
+        List<Producto> productos = productoRepository.findByCategoria("Inexistente");
+        assertTrue(productos.isEmpty(), "La consulta debería devolver una lista vacía para categorías inexistentes");
     }
 }
