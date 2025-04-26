@@ -5,20 +5,25 @@
 <!-- Login -->
 <div class="modal-dialog modal-lg d-flex justify-content-center align-items-center vh-100">
     <div class="modal-content modal-body border-0 p-4 shadow bg-white rounded">
+        <!-- Botón Cerrar -->
         <div class="text-right mb-4">
-            <button type="button" class="btn-close" aria-label="Cerrar"></button>
+            <button type="button" class="btn-close" aria-label="Cerrar" onclick="location.href='/'"></button>
         </div>
         <h3 class="text-center mb-4 text-success">Inicia Sesión</h3>
         <form action="/login" method="post">
+            <!-- Input de Usuario -->
             <div class="input-group mb-3">
                 <input type="text" class="form-control" id="username" name="username" placeholder="Usuario" required>
             </div>
+            <!-- Input de Contraseña -->
             <div class="input-group mb-3">
                 <input type="password" class="form-control" id="password" name="password" placeholder="Contraseña" required>
             </div>
+            <!-- Botón de Enviar -->
             <div class="d-grid gap-2">
                 <button type="submit" class="btn bg-success text-white">Iniciar Sesión</button>
             </div>
+            <!-- Enlace de Registro -->
             <div class="text-center mt-3">
                 <small>¿No tienes cuenta? <a href="/register" class="text-success">Regístrate aquí</a></small>
             </div>
