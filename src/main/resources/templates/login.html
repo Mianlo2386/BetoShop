@@ -5,11 +5,22 @@
 <!-- Login -->
 <div class="modal-dialog modal-lg d-flex justify-content-center align-items-center vh-100">
     <div class="modal-content modal-body border-0 p-4 shadow bg-white rounded">
+        <!-- Logo de la tienda -->
+        <div class="text-center mb-3">
+            <img th:src="@{/assets/img/logo.png}" alt="Logo BetoStore" class="img-fluid" style="max-height: 100px;">
+        </div>
+
         <!-- Botón Cerrar -->
         <div class="text-right mb-4">
             <button type="button" class="btn-close" aria-label="Cerrar" onclick="location.href='/'"></button>
         </div>
         <h3 class="text-center mb-4 text-success">Inicia Sesión</h3>
+
+        <!-- Mensaje de error -->
+        <div th:if="${param.error}" class="alert alert-danger text-center">
+            Usuario o contraseña incorrectos. Por favor, intenta nuevamente.
+        </div>
+
         <form action="/login" method="post">
             <!-- Input de Usuario -->
             <div class="input-group mb-3">
@@ -30,5 +41,6 @@
         </form>
     </div>
 </div>
+
 </body>
 </html>
