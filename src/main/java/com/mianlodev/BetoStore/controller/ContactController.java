@@ -17,7 +17,7 @@ public class ContactController {
     @Autowired
     private JavaMailSender mailSender;
 
-    @Value("${spring.mail.username}") // <-- Usamos directamente el mail de autenticación como destinatario
+    @Value("${spring.mail.username}")
     private String emailDestinatario;
 
     @PostMapping("/contact")
@@ -27,14 +27,29 @@ public class ContactController {
             @RequestParam String subject,
             @RequestParam String message) {
         try {
+            // ---- PRIMER CORREO: envío a mí mismo ----
             MimeMessage mail = mailSender.createMimeMessage();
             MimeMessageHelper helper = new MimeMessageHelper(mail, true);
 
-            helper.setTo(emailDestinatario); // aquí cambiamos
+            helper.setTo(emailDestinatario);
             helper.setSubject(subject);
             helper.setText("Nombre: " + name + "\nEmail: " + email + "\n\nMensaje:\n" + message);
 
             mailSender.send(mail);
+
+            // ---- SEGUNDO CORREO: respuesta automática al usuario ----
+            MimeMessage confirmationMail = mailSender.createMimeMessage();
+            MimeMessageHelper confirmationHelper = new MimeMessageHelper(confirmationMail, true);
+
+            confirmationHelper.setTo(email); // correo del usuario
+            confirmationHelper.setSubject("Gracias por contactarnos");
+            confirmationHelper.setText("Hola " + name + ",\n\n"
+                    + "Gracias por comunicarte con nosotros. Hemos recibido tu mensaje y te contactaremos a la brevedad.\n\n"
+                    + "Saludos,\n"
+                    + "El equipo de BetoStore.");
+
+            mailSender.send(confirmationMail);
+
             return "redirect:/contact?success=true";
         } catch (MessagingException e) {
             e.printStackTrace();
