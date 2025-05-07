@@ -16,7 +16,13 @@
         <div class="text-right mb-4">
             <button type="button" class="btn-close" aria-label="Cerrar" onclick="location.href='/'"></button>
         </div>
+
         <h3 class="text-center mb-4 text-success">Inicia Sesión</h3>
+
+        <!-- Mensaje de registro exitoso -->
+        <div th:if="${param.registroExitoso}" class="alert alert-success text-center">
+            ¡Registro exitoso! Ahora puedes iniciar sesión.
+        </div>
 
         <!-- Mensaje de error -->
         <div th:if="${param.error}" class="alert alert-danger text-center">
