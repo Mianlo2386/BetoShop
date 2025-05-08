@@ -19,22 +19,22 @@ public class SecurityConfig {
         http
                 .csrf(csrf -> csrf.disable())
                 .authorizeHttpRequests(auth -> auth
-                        // Rutas públicas accesibles para todos
                         .requestMatchers("/", "/index", "/about", "/shop", "/shop-single").permitAll()
                         .requestMatchers("/assets/**", "/css/**", "/js/**", "/images/**").permitAll()
-                        // Rutas protegidas (requieren login)
                         .requestMatchers("/contact", "/cart/**").authenticated()
-                        .requestMatchers("/login", "/register").permitAll() // Login y registro accesibles sin autenticación
-                        .anyRequest().authenticated() // Protege todo lo demás
+                        .requestMatchers("/login", "/register").permitAll()
+                        .requestMatchers("/admin/**").hasRole("ADMIN")  // 🔒 Solo administradores
+                        .requestMatchers("/promociones/**").hasRole("ADMIN")  // 🔒 Solo administradores
+                        .anyRequest().authenticated()
                 )
                 .formLogin(form -> form
                         .loginPage("/login")
-                        .defaultSuccessUrl("/", true) // Redirige al inicio tras login exitoso
-                        .failureUrl("/login?error=true") // Redirige a login en caso de error
+                        .defaultSuccessUrl("/", true)
+                        .failureUrl("/login?error=true")
                 )
                 .logout(logout -> logout
                         .logoutUrl("/logout")
-                        .logoutSuccessUrl("/") // Redirige al inicio tras logout
+                        .logoutSuccessUrl("/")
                         .invalidateHttpSession(true)
                         .deleteCookies("JSESSIONID")
                 );
