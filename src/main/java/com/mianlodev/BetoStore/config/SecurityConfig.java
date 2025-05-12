@@ -24,7 +24,7 @@ public class SecurityConfig {
                         .requestMatchers("/contact", "/cart/**").authenticated()
                         .requestMatchers("/login", "/register").permitAll()
                         .requestMatchers("/admin/**").hasRole("ADMIN")  // 🔒 Solo administradores
-                        .requestMatchers("/promociones/**").hasRole("ADMIN")  // 🔒 Solo administradores
+                        .requestMatchers("/promociones/**").permitAll()
                         .anyRequest().authenticated()
                 )
                 .formLogin(form -> form

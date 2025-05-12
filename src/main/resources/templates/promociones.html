@@ -1,0 +1,30 @@
+<!DOCTYPE html>
+<html lang="es" xmlns:th="http://www.thymeleaf.org">
+<head th:replace="~{fragments/head :: head}"></head>
+<body>
+
+<div th:insert="~{fragments/navbar :: navbar}"></div>
+<div th:insert="~{fragments/header :: header}"></div>
+
+<div class="container py-5">
+    <h1 class="text-center">Promociones Disponibles</h1>
+    <div class="row">
+        <div th:each="promocion : ${promociones}" class="col-md-4">
+            <img th:src="${promocion.producto.imagenUrl}" class="img-fluid rounded" style="border-radius: 15px;">
+            <h3 th:text="${promocion.producto.nombre}"></h3>
+            <p>Precio original: <span th:text="'$' + ${promocion.producto.precio}"></span></p>
+            <p>Descuento: <span th:text="${promocion.descuento}"></span>%</p>
+            <p>Precio con descuento: <span th:text="'$' + ${#numbers.formatDecimal(promocion.producto.precio - (promocion.producto.precio * (promocion.descuento / 100)), 1, 2)}"></span></p>
+            <a th:href="@{/shopsingle/{id}(id=${promocion.producto.id})}" class="btn btn-success">Ver detalle</a>
+        </div>
+    </div>
+</div>
+
+<div th:insert="~{fragments/footer :: footer}"></div>
+
+<!-- Scripts -->
+<script th:src="@{/assets/js/jquery-1.11.0.min.js}"></script>
+<script th:src="@{/assets/js/bootstrap.bundle.min.js}"></script>
+
+</body>
+</html>
