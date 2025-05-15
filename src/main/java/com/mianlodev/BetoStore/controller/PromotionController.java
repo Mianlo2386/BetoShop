@@ -1,6 +1,6 @@
 package com.mianlodev.BetoStore.controller;
 
-import com.mianlodev.BetoStore.model.Promocion;
+import com.mianlodev.BetoStore.model.Promotion;
 import com.mianlodev.BetoStore.service.PromotionService;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
@@ -17,7 +17,7 @@ public class PromotionController {
 
     @GetMapping("/promociones")
     public String mostrarPromociones(Model model) {
-        List<Promocion> promociones = promotionService.obtenerPromocionesActivas();
+        List<Promotion> promociones = promotionService.obtenerPromocionesActivas();
         model.addAttribute("promociones", promociones);
         return "promociones";
     }

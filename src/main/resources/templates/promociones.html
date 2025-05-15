@@ -9,13 +9,13 @@
 <div class="container py-5">
     <h1 class="text-center">Promociones Disponibles</h1>
     <div class="row">
-        <div th:each="promocion : ${promociones}" class="col-md-4">
-            <img th:src="${promocion.producto.imagenUrl}" class="img-fluid rounded" style="border-radius: 15px;">
-            <h3 th:text="${promocion.producto.nombre}"></h3>
-            <p>Precio original: <span th:text="'$' + ${promocion.producto.precio}"></span></p>
-            <p>Descuento: <span th:text="${promocion.descuento}"></span>%</p>
-            <p>Precio con descuento: <span th:text="'$' + ${#numbers.formatDecimal(promocion.producto.precio - (promocion.producto.precio * (promocion.descuento / 100)), 1, 2)}"></span></p>
-            <a th:href="@{/shopsingle/{id}(id=${promocion.producto.id})}" class="btn btn-success">Ver detalle</a>
+        <div th:each="promotion : ${promociones}" class="col-md-4">
+            <img th:src="@{https://i.imgur.com/e5qomeU.png}" class="img-fluid rounded" style="border-radius: 15px;">
+            <h3 th:text="${promotion.title}"></h3>
+            <p th:text="${promotion.description}"></p>
+            <p>Tipo: <span th:text="${promotion.type}"></span></p>
+            <p>Descuento: <span th:if="${promotion.discountPercentage != null}" th:text="${promotion.discountPercentage} + '%'"></span></p>
+            <a th:href="@{/promotion/{id}(id=${promotion.id})}" class="btn btn-success">Ver detalle</a>
         </div>
     </div>
 </div>
