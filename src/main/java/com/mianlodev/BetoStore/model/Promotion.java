@@ -7,6 +7,7 @@ import lombok.Setter;
 
 import java.math.BigDecimal;
 import java.time.LocalDate;
+import java.util.List;
 
 @Entity
 @Table(name = "promotions")
@@ -38,4 +39,7 @@ public class Promotion {
 
     @Column(nullable = false)
     private LocalDate endDate;
+
+    @OneToMany(mappedBy = "promotion", cascade = CascadeType.ALL)
+    private List<PromotionImage> images;
 }
