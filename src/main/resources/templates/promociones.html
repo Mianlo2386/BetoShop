@@ -10,11 +10,15 @@
     <h1 class="text-center">Promociones Disponibles</h1>
     <div class="row">
         <div th:each="promotion : ${promociones}" class="col-md-4">
-            <img th:src="${promotion.images[0].imageUrl}" class="img-fluid rounded" style="border-radius: 15px;">
+            <img th:if="${promotion.images != null and promotion.images.size() > 0}"
+                 th:src="${promotion.images[0].imageUrl}"
+                 class="img-fluid rounded" style="border-radius: 15px;">
             <h3 th:text="${promotion.title}"></h3>
-            <p th:text="${promotion.description}"></p>
-            <p>Tipo: <span th:text="${promotion.type}"></span></p>
+            <p th:if="${promotion.type != 'OTRO'}" th:text="${promotion.description}"></p>
+            <p th:if="${promotion.type == 'OTRO'}" th:text="'Promo especial: ' + ${promotion.description}"></p>
+            <p th:if="${promotion.category != null}" th:text="'Categoría: ' + ${promotion.category}"></p>
             <p>Descuento: <span th:if="${promotion.discountPercentage != null}" th:text="${promotion.discountPercentage} + '%'"></span></p>
+            <p th:text="'Válido del ' + ${promotion.startDate} + ' al ' + ${promotion.endDate}"></p>
             <a th:href="@{/promotion/{id}(id=${promotion.id})}" class="btn btn-success">Ver detalle</a>
         </div>
     </div>
