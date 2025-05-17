@@ -1,30 +1,29 @@
 <!DOCTYPE html>
 <html lang="es" xmlns:th="http://www.thymeleaf.org">
 <head th:replace="~{fragments/head :: head}"></head>
-<body>
-
-<div th:insert="~{fragments/navbar :: navbar}"></div>
-<div th:insert="~{fragments/header :: header}"></div>
-
-<div class="container py-5">
-    <h1 class="text-center">Promociones Disponibles</h1>
-    <div class="row">
-        <div th:each="promotion : ${promociones}" class="col-md-4">
-            <img th:src="${promotion.images[0].imageUrl}" class="img-fluid rounded" style="border-radius: 15px;">
-            <h3 th:text="${promotion.title}"></h3>
-            <p th:text="${promotion.description}"></p>
-            <p>Tipo: <span th:text="${promotion.type}"></span></p>
-            <p>Descuento: <span th:if="${promotion.discountPercentage != null}" th:text="${promotion.discountPercentage} + '%'"></span></p>
-            <a th:href="@{/promotion/{id}(id=${promotion.id})}" class="btn btn-success">Ver detalle</a>
+    <body>
+        <div th:insert="~{fragments/navbar :: navbar}"></div>
+        <div th:insert="~{fragments/header :: header}"></div>
+        <div class="container py-5">
+            <h1 class="text-center">Promociones Disponibles</h1>
+            <div class="row">
+                <div th:each="promotion : ${promociones}" class="col-md-4">
+                    <img th:if="${promotion.images != null and promotion.images.size() > 0}"
+                         th:src="${promotion.images[0].imageUrl}"
+                         class="img-fluid rounded" style="border-radius: 15px;">
+                    <h3 th:text="${promotion.title}"></h3>
+                    <p th:if="${promotion.type != 'OTRO'}" th:text="${promotion.description}"></p>
+                    <p th:if="${promotion.type == 'OTRO'}" th:text="'Promo especial: ' + ${promotion.description}"></p>
+                    <p th:if="${promotion.category != null}" th:text="'Categoría: ' + ${promotion.category}"></p>
+                    <p>Descuento: <span th:if="${promotion.discountPercentage != null}" th:text="${promotion.discountPercentage} + '%'"></span></p>
+                    <p th:text="'Válido del ' + ${promotion.startDate} + ' al ' + ${promotion.endDate}"></p>
+                    <a th:href="@{/promotion/{id}(id=${promotion.id})}" class="btn btn-success">Ver detalle</a>
+                </div>
+            </div>
         </div>
-    </div>
-</div>
-
-<div th:insert="~{fragments/footer :: footer}"></div>
-
+        <div th:insert="~{fragments/footer :: footer}"></div>
 <!-- Scripts -->
 <script th:src="@{/assets/js/jquery-1.11.0.min.js}"></script>
 <script th:src="@{/assets/js/bootstrap.bundle.min.js}"></script>
-
-</body>
+    </body>
 </html>
