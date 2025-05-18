@@ -19,12 +19,12 @@ public class SecurityConfig {
         http
                 .csrf(csrf -> csrf.disable())
                 .authorizeHttpRequests(auth -> auth
-                        .requestMatchers("/", "/index", "/about", "/shop", "/shop-single").permitAll()
+                        .requestMatchers("/", "/index", "/about", "/shop", "/shop-single", "/promociones").permitAll()
                         .requestMatchers("/assets/**", "/css/**", "/js/**", "/images/**").permitAll()
                         .requestMatchers("/contact", "/cart/**").authenticated()
                         .requestMatchers("/login", "/register").permitAll()
                         .requestMatchers("/admin/**").hasRole("ADMIN")  // 🔒 Solo administradores
-                        .requestMatchers("/promociones/**").permitAll()
+                        /*.requestMatchers("/promociones/**").permitAll()*/
                         .anyRequest().authenticated()
                 )
                 .formLogin(form -> form
