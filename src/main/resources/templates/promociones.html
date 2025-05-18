@@ -11,9 +11,10 @@
             <h1 class="text-center">Promociones Disponibles</h1>
             <div class="row">
                 <div th:each="promotion : ${promociones}" class="col-md-4">
-                    <img th:if="${promotion.images != null and promotion.images.size() > 0}"
-                         th:src="${promotion.images[0].imageUrl}"
-                         class="img-fluid rounded" style="border-radius: 15px;">
+                    <p>Cantidad de imágenes: <span th:text="${promotion.images.size()}"></span></p>
+                    <div th:each="image : ${promotion.images}">
+                        <img th:src="${image.imageUrl}" class="img-fluid rounded" style="border-radius: 15px;">
+                    </div>
                     <h3 th:text="${promotion.title}"></h3>
                     <p th:if="${promotion.type != 'OTRO'}" th:text="${promotion.description}"></p>
                     <p th:if="${promotion.type == 'OTRO'}" th:text="'Promo especial: ' + ${promotion.description}"></p>
