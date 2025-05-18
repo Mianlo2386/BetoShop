@@ -19,20 +19,22 @@ public class ShopController {
     private ProductoService productoService;
 
     @GetMapping
-    public String mostrarProductos(@RequestParam(value = "query", required = false) String query, Model model) {
-        List<Producto> productos;
+    public String mostrarProductos(@RequestParam(value = "search", required = false) String search, Model model) {
+        System.out.println("Búsqueda recibida en ShopController: " + search);
 
-        if (query != null && !query.trim().isEmpty()) {
-            productos = productoService.buscarPorNombreCategoriaSubcategoria(query);
-            System.out.println("Productos encontrados para '" + query + "': " + productos.size());
+        List<Producto> productos;
+        if (search != null && !search.trim().isEmpty()) {
+            productos = productoService.buscarPorNombreCategoriaSubcategoria(search);
+            System.out.println("Productos encontrados para '" + search + "': " + productos.size());
         } else {
             productos = productoService.obtenerTodos();
             System.out.println("Mostrando todos los productos: " + productos.size());
         }
 
         model.addAttribute("productos", productos);
-        model.addAttribute("mensaje", (query != null && !query.trim().isEmpty()) ? "Resultados para: " + query : "Todos los productos");
+        model.addAttribute("mensaje", search != null && !search.trim().isEmpty() ? "Resultados para: " + search : "Todos los productos");
 
         return "shop";
     }
+
 }
