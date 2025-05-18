@@ -35,9 +35,10 @@ public class ProductoServiceImpl implements ProductoService {
     }
 
     @Override
-    public List<Producto> buscarPorNombreOCategoriaOSubcategoria(String query) {
-        return productoRepository.buscarPorNombreOCategoriaOSubcategoria(query);
+    public List<Producto> buscarPorNombreCategoriaSubcategoria(String search) {
+        return productoRepository.buscarPorNombreCategoriaSubcategoria(search);
     }
+
 
 
 }

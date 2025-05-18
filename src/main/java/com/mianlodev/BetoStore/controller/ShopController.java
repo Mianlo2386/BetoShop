@@ -22,16 +22,17 @@ public class ShopController {
     public String mostrarProductos(@RequestParam(value = "query", required = false) String query, Model model) {
         List<Producto> productos;
 
-        if (query != null && !query.isEmpty()) {
-            productos = productoService.buscarPorNombreOCategoriaOSubcategoria(query);
-            model.addAttribute("mensaje", "Resultados para: " + query);
+        if (query != null && !query.trim().isEmpty()) {
+            productos = productoService.buscarPorNombreCategoriaSubcategoria(query);
+            System.out.println("Productos encontrados para '" + query + "': " + productos.size());
         } else {
-            productos = productoService.obtenerTodos(); // Si no hay búsqueda, muestra todos los productos
-            model.addAttribute("mensaje", "Todos los productos");
+            productos = productoService.obtenerTodos();
+            System.out.println("Mostrando todos los productos: " + productos.size());
         }
 
         model.addAttribute("productos", productos);
-        return "shop"; // Redirige a la vista shop.html
+        model.addAttribute("mensaje", (query != null && !query.trim().isEmpty()) ? "Resultados para: " + query : "Todos los productos");
+
+        return "shop";
     }
 }
-

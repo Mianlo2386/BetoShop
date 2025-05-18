@@ -10,5 +10,6 @@ public interface ProductoService {
     Producto obtenerPorId(Long id);
     void eliminarPorId(Long id);
 
-    List<Producto> buscarPorNombreOCategoriaOSubcategoria(String query);
+    // Buscar productos por múltiples criterios (nombre, categoría, subcategoría)
+    List<Producto> buscarPorNombreCategoriaSubcategoria(String search);
 }
