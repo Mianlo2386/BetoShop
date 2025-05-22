@@ -9,7 +9,6 @@ public interface ProductoService {
     Producto guardarProducto(Producto producto);
     Producto obtenerPorId(Long id);
     void eliminarPorId(Long id);
-
-    // Buscar productos por múltiples criterios (nombre, categoría, subcategoría)
+    List<Producto> obtenerReleases(); // Solo la declaración del método
     List<Producto> buscarPorNombreCategoriaSubcategoria(String search);
 }

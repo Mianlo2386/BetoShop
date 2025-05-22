@@ -19,7 +19,7 @@ public class SecurityConfig {
         http
                 .csrf(csrf -> csrf.disable())
                 .authorizeHttpRequests(auth -> auth
-                        .requestMatchers("/", "/index", "/about", "/shop", "/shop-single", "/promociones").permitAll()
+                        .requestMatchers("/", "/index", "/about", "/shop", "/shop-single", "/promociones", "/releases").permitAll()
                         .requestMatchers("/assets/**", "/css/**", "/js/**", "/images/**").permitAll()
                         .requestMatchers("/contact", "/cart/**").authenticated()
                         .requestMatchers("/login", "/register").permitAll()

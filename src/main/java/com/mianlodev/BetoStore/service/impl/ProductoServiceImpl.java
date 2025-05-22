@@ -5,7 +5,10 @@ import com.mianlodev.BetoStore.repository.ProductoRepository;
 import com.mianlodev.BetoStore.service.ProductoService;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
+
+import java.time.LocalDate;
 import java.util.List;
+
 
 @Service
 public class ProductoServiceImpl implements ProductoService {
@@ -25,8 +28,7 @@ public class ProductoServiceImpl implements ProductoService {
 
     @Override
     public Producto obtenerPorId(Long id) {
-        return productoRepository.findById(id)
-                .orElseThrow(() -> new RuntimeException("Producto no encontrado"));
+        return productoRepository.findById(id).orElse(null);
     }
 
     @Override
@@ -35,11 +37,13 @@ public class ProductoServiceImpl implements ProductoService {
     }
 
     @Override
-    public List<Producto> buscarPorNombreCategoriaSubcategoria(String query) {
-        System.out.println("Parámetro recibido en ProductoService: " + query);
-        return productoRepository.buscarPorNombreCategoriaSubcategoria(query);
+    public List<Producto> obtenerReleases() {
+        LocalDate fechaLimite = LocalDate.now().minusDays(30);
+        return productoRepository.obtenerReleases(fechaLimite);
     }
 
-
-
+    @Override
+    public List<Producto> buscarPorNombreCategoriaSubcategoria(String search) {
+        return productoRepository.buscarPorNombreCategoriaSubcategoria(search);
+    }
 }

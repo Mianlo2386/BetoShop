@@ -6,6 +6,7 @@ import lombok.Setter;
 import lombok.NoArgsConstructor;
 import lombok.AllArgsConstructor;
 
+import java.time.LocalDate;
 import java.util.ArrayList;
 import java.util.Arrays;
 import java.util.List;
@@ -50,6 +51,11 @@ public class Producto {
     // Nueva columna stars
     @Column(name = "stars")
     private int stars;
+
+    @Column(name = "release_date")
+    private LocalDate releaseDate;
+
+
 
     public List<String> getImagenes() {
         return imagenes.stream()
