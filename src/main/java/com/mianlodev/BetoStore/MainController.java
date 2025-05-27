@@ -9,17 +9,29 @@ import org.springframework.ui.Model;
 import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.PathVariable;
 
+import java.util.ArrayList;
+import java.util.List;
+
 @Controller
 public class MainController {
 
     @Autowired
-    private ProductoService productoService; // Inyección correcta del servicio
+    private ProductoService productoService;
 
     @Value("${GOOGLE_MAPS_API}")
     private String googleMapsApiKey;
 
     @GetMapping("/")
-    public String home() {
+    public String home(Model model) {
+        List<Producto> releases = productoService.obtenerReleases();
+
+        // Agrupar manualmente en listas de 3 productos
+        List<List<Producto>> grupos = new ArrayList<>();
+        for (int i = 0; i < releases.size(); i += 3) {
+            grupos.add(releases.subList(i, Math.min(i + 3, releases.size())));
+        }
+
+        model.addAttribute("releasesGrupos", grupos);
         return "index";
     }
 
@@ -28,15 +40,6 @@ public class MainController {
         return "about";
     }
 
-//    @GetMapping("/shopsingle/{id}")
-//    public String shopsingle(@PathVariable Long id, Model model) {
-//        Producto producto = productoService.obtenerPorId(id);
-//        System.out.println(producto); // Imprime el producto para verificar
-//        System.out.println(producto.getImagenes());
-//        model.addAttribute("producto", producto);
-//        model.addAttribute("imagenes", producto.getImagenes());
-//        return "shop-single";
-//    }
 
     @GetMapping("/contact")
     public String contact(Model model) {
