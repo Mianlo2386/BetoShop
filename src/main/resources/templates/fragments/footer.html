@@ -67,8 +67,10 @@
                 <div class="col-auto">
                     <label class="sr-only" for="subscribeEmail">Email</label>
                     <div class="input-group mb-2">
-                        <input type="text" class="form-control bg-dark border-light" id="subscribeEmail" placeholder="Email">
-                        <div class="input-group-text btn-success text-light">Subscribete</div>
+                        <input type="text" class="form-control bg-dark border-light text-light" id="subscribeEmail" placeholder="Email">
+                        <button type="button" class="input-group-text btn-success text-light" data-bs-toggle="modal" data-bs-target="#suscripcionModal">
+                            Subscríbete
+                        </button>
                     </div>
                 </div>
             </div>
@@ -82,6 +84,24 @@
                             Copyright &copy; 2025 MianloDev
                             | Diseñado por <a rel="sponsored" href="https://mianlo2386.github.io/Portfolio-con-responsive/" target="_blank">MianloDev</a>
                         </p>
+                    </div>
+                </div>
+            </div>
+        </div>
+        <!-- Modal de Suscripción -->
+        <div class="modal fade" id="suscripcionModal" tabindex="-1" aria-labelledby="suscripcionLabel" aria-hidden="true">
+            <div class="modal-dialog modal-dialog-centered">
+                <div class="modal-content bg-dark text-light">
+                    <div class="modal-header">
+                        <h5 class="modal-title" id="suscripcionLabel">Suscripción a novedades</h5>
+                        <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Cerrar"></button>
+                    </div>
+                    <div class="modal-body">
+                        Para suscribirte, asegúrate de tener configurado un cliente de correo en tu dispositivo.
+                        Si no tienes uno, puedes escribirnos directamente a <strong>betostore@gmail.com</strong>.
+                    </div>
+                    <div class="modal-footer">
+                        <button type="button" class="btn btn-success" data-bs-dismiss="modal">Entendido</button>
                     </div>
                 </div>
             </div>
