@@ -46,4 +46,8 @@ public class ProductoServiceImpl implements ProductoService {
     public List<Producto> buscarPorNombreCategoriaSubcategoria(String search) {
         return productoRepository.buscarPorNombreCategoriaSubcategoria(search);
     }
+    @Override
+    public void actualizarProducto(Producto producto) {
+        productoRepository.save(producto);
+    }
 }

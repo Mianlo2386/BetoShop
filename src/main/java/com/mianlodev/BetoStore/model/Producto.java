@@ -5,10 +5,11 @@ import lombok.Getter;
 import lombok.Setter;
 import lombok.NoArgsConstructor;
 import lombok.AllArgsConstructor;
+import com.mianlodev.BetoStore.model.ProductImage;
 
 import java.time.LocalDate;
 import java.util.ArrayList;
-import java.util.Arrays;
+
 import java.util.List;
 
 @Entity
@@ -55,6 +56,8 @@ public class Producto {
     @Column(name = "release_date")
     private LocalDate releaseDate;
 
+    @Column(name = "stock", nullable = false)
+    private int stock;
 
 
     public List<String> getImagenes() {
@@ -65,4 +68,7 @@ public class Producto {
 
     @OneToMany(mappedBy = "producto", cascade = CascadeType.ALL)
     private List<ProductImage> imagenes = new ArrayList<>();
+
+
+
 }

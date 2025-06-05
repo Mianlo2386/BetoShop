@@ -114,7 +114,7 @@
                                         </ul>
                                     </div>
                                     <!-- Sección de cantidad -->
-                                    <div class="col-auto">
+                                    <!--<div class="col-auto">
                                         <ul class="list-inline pb-3">
                                             <li class="list-inline-item text-right">
                                                 Cantidad
@@ -124,9 +124,37 @@
                                             <li class="list-inline-item"><span class="badge bg-secondary" id="var-value">1</span></li>
                                             <li class="list-inline-item"><span class="btn btn-success" id="btn-plus">+</span></li>
                                         </ul>
-                                    </div>
+                                    </div>-->
                                 </div>
                                 <!-- Botones de acción -->
+                                <!--<div class="row pb-3">
+                                    <div class="col d-grid">
+                                        <button type="submit" class="btn btn-success btn-lg" name="submit" value="buy">Compra</button>
+                                    </div>
+                                    <div class="col d-grid">
+                                        <button type="submit" class="btn btn-success btn-lg" name="submit" value="addtocard">Adicionar</button>
+                                    </div>
+                                </div>-->
+                            </form>
+                            <!-- Formulario POST separado para el carrito -->
+                            <form action="/cart/add" method="POST">
+                                <input type="hidden" name="productId" th:value="${producto.id}">
+
+                                <!-- Sección de cantidad con mismo estilo -->
+                                <div class="row pb-3">
+                                    <div class="col-auto">
+                                        <ul class="list-inline pb-3">
+                                            <li class="list-inline-item text-right">
+                                                Cantidad
+                                                <input type="hidden" name="quantity" id="product-quantity-post" value="1">
+                                            </li>
+                                            <li class="list-inline-item"><span class="btn btn-success" id="btn-minus-post">-</span></li>
+                                            <li class="list-inline-item"><span class="badge bg-secondary" id="var-value-post">1</span></li>
+                                            <li class="list-inline-item"><span class="btn btn-success" id="btn-plus-post">+</span></li>
+                                        </ul>
+                                    </div>
+                                </div>
+
                                 <div class="row pb-3">
                                     <div class="col d-grid">
                                         <button type="submit" class="btn btn-success btn-lg" name="submit" value="buy">Compra</button>
@@ -136,6 +164,7 @@
                                     </div>
                                 </div>
                             </form>
+
                         </div>
                     </div>
 

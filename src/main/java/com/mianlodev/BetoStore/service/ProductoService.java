@@ -11,4 +11,5 @@ public interface ProductoService {
     void eliminarPorId(Long id);
     List<Producto> obtenerReleases(); // Solo la declaración del método
     List<Producto> buscarPorNombreCategoriaSubcategoria(String search);
+    public void actualizarProducto(Producto producto);
 }

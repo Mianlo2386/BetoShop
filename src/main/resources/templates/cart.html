@@ -1,0 +1,36 @@
+<!DOCTYPE html>
+<html lang="es" xmlns:th="http://www.w3.org/1999/xhtml">
+<head>
+    <meta charset="UTF-8">
+    <title>Carrito de Compras</title>
+    <link rel="stylesheet" href="/css/styles.css">
+</head>
+<body>
+<h1>Carrito de Compras</h1>
+
+<table>
+    <thead>
+    <tr>
+        <th>Producto</th>
+        <th>Cantidad</th>
+        <th>Acción</th>
+    </tr>
+    </thead>
+    <tbody>
+    <!-- Iterar sobre los productos del carrito -->
+    <tr th:each="item : ${items}">
+        <td th:text="${item.producto.nombre}"></td>
+        <td th:text="${item.quantity}"></td>
+        <td>
+            <form action="/cart/delete" method="POST">
+                <input type="hidden" name="productId" th:value="${item.producto.id}">
+                <button type="submit">Eliminar</button>
+            </form>
+        </td>
+    </tr>
+    </tbody>
+</table>
+
+<a href="/shop">Seguir Comprando</a>
+</body>
+</html>
