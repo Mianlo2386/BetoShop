@@ -5,6 +5,7 @@ import com.mianlodev.BetoStore.model.Producto;
 import com.mianlodev.BetoStore.repository.CartRepository;
 import com.mianlodev.BetoStore.service.CartService;
 import com.mianlodev.BetoStore.service.ProductoService;
+import jakarta.transaction.Transactional;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
@@ -45,7 +46,9 @@ public class CartServiceImpl implements CartService {
         return cartRepository.findAll();
     }
 
-    @Override
+
+
+    @Transactional
     public void eliminarProducto(Long productId) {
         cartRepository.deleteByProducto_Id(productId);
         System.out.println("Producto eliminado del carrito con ID: " + productId);

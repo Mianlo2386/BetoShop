@@ -43,4 +43,10 @@ public class CartController {
         model.addAttribute("items", cartService.obtenerCarrito());
         return "cart";
     }
+
+    @PostMapping("/delete")
+    public String eliminarProducto(@RequestParam Long productId) {
+        cartService.eliminarProducto(productId);
+        return "redirect:/cart";
+    }
 }
