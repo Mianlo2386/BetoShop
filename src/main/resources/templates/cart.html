@@ -22,7 +22,8 @@
                             <tr>
                                 <th>Producto</th>
                                 <th>Cantidad</th>
-                                <th>Precio</th>
+                                <th>Precio Unitario</th>
+                                <th>Precio Total</th>
                                 <th>Acción</th>
                             </tr>
                             </thead>
@@ -30,7 +31,8 @@
                             <tr th:each="item : ${items}">
                                 <td th:text="${item.producto.nombre}"></td>
                                 <td th:text="${item.quantity}"></td>
-                                <td th:text="'$' + ${item.producto.precio * item.quantity}"></td>
+                                <td th:text="'$' + ${item.producto.precio}"></td> <!-- Precio unitario -->
+                                <td th:text="'$' + ${item.producto.precio * item.quantity}"></td> <!-- Precio total -->
                                 <td>
                                     <form action="/cart/delete" method="POST">
                                         <input type="hidden" name="productId" th:value="${item.producto.id}">
