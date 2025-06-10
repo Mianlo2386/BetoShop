@@ -9,6 +9,8 @@ import org.springframework.ui.Model;
 import org.springframework.web.bind.annotation.*;
 import com.mianlodev.BetoStore.service.CartService;
 
+import java.util.List;
+
 @Controller
 @RequestMapping("/cart")
 public class CartController {
@@ -40,7 +42,8 @@ public class CartController {
 
     @GetMapping
     public String mostrarCarrito(Model model) {
-        model.addAttribute("items", cartService.obtenerCarrito());
+        List<CartItem> carrito = cartService.obtenerCarrito();
+        model.addAttribute("items", carrito);
         return "cart";
     }
 

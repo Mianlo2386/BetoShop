@@ -1,6 +1,7 @@
 package com.mianlodev.BetoStore;
 
 import com.mianlodev.BetoStore.model.Producto;
+import com.mianlodev.BetoStore.service.CartService;
 import com.mianlodev.BetoStore.service.ProductoService;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.beans.factory.annotation.Value;
@@ -18,8 +19,13 @@ public class MainController {
     @Autowired
     private ProductoService productoService;
 
+    @Autowired
+    private CartService cartService;
+
     @Value("${GOOGLE_MAPS_API}")
     private String googleMapsApiKey;
+
+
 
     @GetMapping("/")
     public String home(Model model) {
@@ -32,6 +38,8 @@ public class MainController {
         }
 
         model.addAttribute("releasesGrupos", grupos);
+        model.addAttribute("items", cartService.obtenerCarrito()); // Agrega el carrito
+
         return "index";
     }
 
