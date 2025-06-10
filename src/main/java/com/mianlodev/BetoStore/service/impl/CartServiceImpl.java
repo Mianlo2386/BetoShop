@@ -46,12 +46,16 @@ public class CartServiceImpl implements CartService {
         return cartRepository.findAll();
     }
 
-
-
     @Transactional
     public void eliminarProducto(Long productId) {
-        cartRepository.deleteByProducto_Id(productId);
-        System.out.println("Producto eliminado del carrito con ID: " + productId);
+        CartItem item = cartRepository.findByProducto_Id(productId);
+        if (item != null) {
+            Producto producto = item.getProducto();
+            producto.setStock(producto.getStock() + item.getQuantity()); // Restaurar stock
+            productoService.actualizarProducto(producto); // Guardar cambios en la BD
+            cartRepository.deleteByProducto_Id(productId);
+            System.out.println("Producto eliminado y stock restaurado para ID: " + productId);
+        }
     }
 
     @Override
