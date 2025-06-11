@@ -29,7 +29,7 @@
                             </thead>
                             <tbody>
                             <tr th:each="item : ${items}">
-                                <td><a th:href="@{/shop-single/{id}(id=${item.producto.id})}" th:text="${item.producto.nombre}" class="text-success"></a></td>
+                                <td><a th:href="@{/shopsingle/{id}(id=${item.producto.id})}" th:text="${item.producto.nombre}" class="text-dark text-decoration-none"></a></td>
                                 <td th:text="${item.quantity}"></td>
                                 <td th:text="'$' + ${item.producto.precio}"></td> <!-- Precio unitario -->
                                 <td th:text="'$' + ${item.producto.precio * item.quantity}"></td> <!-- Precio total -->
