@@ -7,12 +7,16 @@ import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
 import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.PathVariable;
+import com.mianlodev.BetoStore.service.CartService;
 
 @Controller
 public class ShopSingleController {
 
     @Autowired
     private ProductoService productoService; // Servicio para manejar la lógica del producto
+
+    @Autowired
+    private CartService cartService;
 
     @GetMapping("/shopsingle/{id}")
     public String shopsingle(@PathVariable Long id, Model model) {
@@ -25,10 +29,9 @@ public class ShopSingleController {
 
         model.addAttribute("producto", producto);
         model.addAttribute("imagenes", producto.getImagenes()); // Pasa las imágenes relacionadas
+        model.addAttribute("items", cartService.obtenerCarrito()); // 🔥 Agregamos el carrito
+
         return "shop-single";
     }
-
-
-
 
 }

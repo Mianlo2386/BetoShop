@@ -1,10 +1,13 @@
 package com.mianlodev.BetoStore.controller;
 
+import com.mianlodev.BetoStore.service.CartService;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.beans.factory.annotation.Value;
 import org.springframework.mail.javamail.JavaMailSender;
 import org.springframework.mail.javamail.MimeMessageHelper;
 import org.springframework.stereotype.Controller;
+import org.springframework.ui.Model;
+import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.PostMapping;
 import org.springframework.web.bind.annotation.RequestParam;
 
@@ -17,15 +20,22 @@ public class ContactController {
     @Autowired
     private JavaMailSender mailSender;
 
+    @Autowired
+    private CartService cartService;
+
     @Value("${spring.mail.username}")
     private String emailDestinatario;
+
+    @Value("${GOOGLE_MAPS_API}")
+    private String googleMapsApiKey;
 
     @PostMapping("/contact")
     public String sendContactEmail(
             @RequestParam String name,
             @RequestParam String email,
             @RequestParam String subject,
-            @RequestParam String message) {
+            @RequestParam String message,
+            Model model) {  // 🔥 Agregamos el modelo
         try {
             // ---- PRIMER CORREO: envío a mí mismo ----
             MimeMessage mail = mailSender.createMimeMessage();
@@ -50,10 +60,20 @@ public class ContactController {
 
             mailSender.send(confirmationMail);
 
+            // 🔥 Agregamos `items` al modelo antes de redirigir
+            model.addAttribute("items", cartService.obtenerCarrito());
+
             return "redirect:/contact?success=true";
         } catch (MessagingException e) {
             e.printStackTrace();
             return "redirect:/contact?error=true";
         }
+    }
+
+    @GetMapping("/contact")
+    public String mostrarPaginaContacto(Model model) {
+        model.addAttribute("googleMapsApiKey", googleMapsApiKey);
+        model.addAttribute("items", cartService.obtenerCarrito()); // 🔥 Agregamos el carrito
+        return "contact";
     }
 }

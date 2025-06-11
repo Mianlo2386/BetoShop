@@ -1,6 +1,7 @@
 package com.mianlodev.BetoStore.controller;
 
 import com.mianlodev.BetoStore.model.Producto;
+import com.mianlodev.BetoStore.service.CartService;
 import com.mianlodev.BetoStore.service.ProductoService;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
@@ -18,6 +19,9 @@ public class ShopController {
     @Autowired
     private ProductoService productoService;
 
+    @Autowired
+    private CartService cartService;
+
     @GetMapping
     public String mostrarProductos(@RequestParam(value = "search", required = false) String search, Model model) {
         System.out.println("Búsqueda recibida en ShopController: " + search);
@@ -33,8 +37,10 @@ public class ShopController {
 
         model.addAttribute("productos", productos);
         model.addAttribute("mensaje", search != null && !search.trim().isEmpty() ? "Resultados para: " + search : "Todos los productos");
+        model.addAttribute("items", cartService.obtenerCarrito()); // 🔥 Ahora el carrito está disponible en la tienda
 
         return "shop";
     }
+
 
 }

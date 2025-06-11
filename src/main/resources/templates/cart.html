@@ -29,21 +29,21 @@
                             </thead>
                             <tbody>
                             <tr th:each="item : ${items}">
-                                <td th:text="${item.producto.nombre}"></td>
+                                <td><a th:href="@{/shop-single/{id}(id=${item.producto.id})}" th:text="${item.producto.nombre}" class="text-success"></a></td>
                                 <td th:text="${item.quantity}"></td>
                                 <td th:text="'$' + ${item.producto.precio}"></td> <!-- Precio unitario -->
                                 <td th:text="'$' + ${item.producto.precio * item.quantity}"></td> <!-- Precio total -->
                                 <td>
                                     <form action="/cart/delete" method="POST">
                                         <input type="hidden" name="productId" th:value="${item.producto.id}">
-                                        <button class="btn btn-danger">Eliminar</button>
+                                        <button class="btn btn-success">Eliminar</button>
                                     </form>
                                 </td>
                             </tr>
                             </tbody>
                         </table>
                         <div class="text-center">
-                            <a href="/shop" class="btn btn-primary btn-lg">Seguir comprando</a>
+                            <a href="/shop" class="btn btn-success btn-lg">Seguir comprando</a>
                             <a href="/checkout" class="btn btn-success btn-lg">Finalizar compra</a>
                         </div>
                     </div>

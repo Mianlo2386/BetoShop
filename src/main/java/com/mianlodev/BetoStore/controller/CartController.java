@@ -52,4 +52,5 @@ public class CartController {
         cartService.eliminarProducto(productId);
         return "redirect:/cart";
     }
+
 }
