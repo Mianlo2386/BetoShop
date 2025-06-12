@@ -9,6 +9,7 @@ import jakarta.transaction.Transactional;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
+import java.util.ArrayList;
 import java.util.List;
 
 @Service
@@ -43,7 +44,8 @@ public class CartServiceImpl implements CartService {
 
     @Override
     public List<CartItem> obtenerCarrito() {
-        return cartRepository.findAll();
+        List<CartItem> carrito = cartRepository.findAll();
+        return carrito != null ? carrito : new ArrayList<>(); // 🔥 Si es `null`, devuelve una lista vacía
     }
 
     @Transactional
@@ -69,5 +71,10 @@ public class CartServiceImpl implements CartService {
         } else {
             System.out.println("Stock insuficiente para completar la compra.");
         }
+    }
+    @Override
+    public void vaciarCarrito() {
+        cartRepository.deleteAll();
+        System.out.println("Carrito vaciado correctamente.");
     }
 }

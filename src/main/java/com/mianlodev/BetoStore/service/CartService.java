@@ -11,4 +11,6 @@ public interface CartService {
     void eliminarProducto(Long productId);
     void procesarCompra(Producto producto, int cantidad);
 
+    void vaciarCarrito();
+
 }
