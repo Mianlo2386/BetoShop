@@ -4,6 +4,7 @@ import com.mianlodev.BetoStore.model.Producto;
 import com.mianlodev.BetoStore.repository.ProductoRepository;
 import com.mianlodev.BetoStore.service.ProductoService;
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.data.domain.Sort;
 import org.springframework.stereotype.Service;
 
 import java.time.LocalDate;
@@ -50,4 +51,10 @@ public class ProductoServiceImpl implements ProductoService {
     public void actualizarProducto(Producto producto) {
         productoRepository.save(producto);
     }
+
+    @Override
+    public List<Producto> listarTodos() {
+        return productoRepository.findAll(Sort.by("nombre").ascending());
+    }
+
 }
