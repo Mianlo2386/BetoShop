@@ -1,0 +1,70 @@
+<!DOCTYPE html>
+<html lang="en" xmlns:th="http://www.thymeleaf.org">
+<head th:replace="~{fragments/head :: head}"></head>
+<body>
+
+<div th:insert="~{fragments/navbar :: navbar}"></div>
+<div th:insert="~{fragments/header :: header}"></div>
+<div th:insert="~{fragments/modal :: modal}"></div>
+
+<section class="bg-light">
+    <div class="container pb-5">
+        <div class="row">
+            <div class="col-lg-12 mt-5">
+                <div class="card shadow">
+                    <div class="card-body">
+                        <h2 class="h2 text-center mb-4">Gestión de Productos</h2>
+
+                        <table class="table table-bordered table-striped table-hover">
+                            <thead class="table-success">
+                            <tr>
+                                <th>ID</th>
+                                <th>Nombre</th>
+                                <th>Precio</th>
+                                <th>Stock</th>
+                                <th>Categoría</th>
+                                <th>Acciones</th>
+                            </tr>
+                            </thead>
+                            <tbody>
+                            <tr th:each="producto : ${products}">
+                                <td th:text="${producto.id}">1</td>
+                                <td th:text="${producto.nombre}">Nombre</td>
+                                <td th:text="'$' + ${producto.precio}">100.00</td>
+                                <td th:text="${producto.stock}">5</td>
+                                <td th:text="${producto.categoria}">Sin categoría</td>
+                                <td>
+                                    <div class="d-flex gap-2 justify-content-center">
+                                        <a th:href="@{/admin/productos/editar/{id}(id=${producto.id})}" class="btn btn-sm btn-outline-success">Editar</a>
+                                        <form th:action="@{/admin/productos/eliminar/{id}(id=${producto.id})}" method="post" onsubmit="return confirm('¿Eliminar este producto?');">
+                                            <button type="submit" class="btn btn-sm btn-outline-danger">Eliminar</button>
+                                        </form>
+                                    </div>
+                                </td>
+                            </tr>
+                            </tbody>
+                        </table>
+
+                        <div class="d-flex justify-content-end">
+                            <a href="/admin/productos/nuevo" class="btn btn-success">Agregar nuevo producto</a>
+                        </div>
+
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+</section>
+
+<div th:insert="~{fragments/footer :: footer}"></div>
+
+<!-- Scripts -->
+<script th:src="@{/assets/js/jquery-1.11.0.min.js}"></script>
+<script th:src="@{/assets/js/jquery-migrate-1.2.1.min.js}"></script>
+<script th:src="@{/assets/js/bootstrap.bundle.min.js}"></script>
+<script th:src="@{/assets/js/templatemo.js}"></script>
+<script th:src="@{/assets/js/custom.js}"></script>
+<script th:src="@{/assets/js/carrousel.releases.js}"></script>
+
+</body>
+</html>

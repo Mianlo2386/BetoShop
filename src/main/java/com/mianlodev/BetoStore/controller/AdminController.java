@@ -24,11 +24,12 @@ public class AdminController {
     public String mostrarAdminPanel(Model model) { // 🔥 Agregamos `Model`
 
         model.addAttribute("items", cartService.obtenerCarrito()); // 🔥 Pasamos `items`
-        return "admin"; // Aquí irá el HTML que diseñes para administradores
+        return "admin/dashboard";
     }
     @GetMapping("/admin/productos")
     public String gestionarProductos(Model model) {
-        model.addAttribute("productos", productoService.listarTodos());
+        model.addAttribute("products", productoService.listarTodos());
+        model.addAttribute("items", cartService.obtenerCarrito());
         return "admin/productos";
     }
 
