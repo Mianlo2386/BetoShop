@@ -57,4 +57,11 @@ public class ProductoServiceImpl implements ProductoService {
         return productoRepository.findAll(Sort.by("nombre").ascending());
     }
 
+    @Override
+    public void guardar(Producto producto) {
+        productoRepository.save(producto);
+    }
+
+
+
 }

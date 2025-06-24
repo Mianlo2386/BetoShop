@@ -13,5 +13,7 @@ public interface ProductoService {
     List<Producto> buscarPorNombreCategoriaSubcategoria(String search);
     public void actualizarProducto(Producto producto);
     List<Producto> listarTodos();
+    void guardar(Producto producto);
+
 
 }

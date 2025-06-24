@@ -1,0 +1,75 @@
+<!DOCTYPE html>
+<html lang="es" xmlns:th="http://www.thymeleaf.org">
+<head th:replace="~{fragments/head :: head}"></head>
+<body>
+
+<div th:insert="~{fragments/navbar :: navbar}"></div>
+<div th:insert="~{fragments/header :: header}"></div>
+
+<section class="bg-light py-5">
+    <div class="container">
+        <div class="card shadow">
+            <div class="card-body">
+                <h2 class="h2 mb-4 text-center">Nuevo Producto</h2>
+
+                <form th:action="@{/admin/productos/guardar}" method="post">
+                    <div class="row g-3">
+
+                        <div class="col-md-6">
+                            <label class="form-label">Nombre</label>
+                            <input type="text" class="form-control" name="nombre" required>
+                        </div>
+
+                        <div class="col-md-6">
+                            <label class="form-label">Precio</label>
+                            <input type="number" class="form-control" name="precio" step="0.01" required>
+                        </div>
+
+                        <div class="col-md-6">
+                            <label class="form-label">Stock</label>
+                            <input type="number" class="form-control" name="stock" required>
+                        </div>
+
+                        <div class="col-md-6">
+                            <label class="form-label">Categoría</label>
+                            <input type="text" class="form-control" name="categoria">
+                        </div>
+
+                        <div class="col-12">
+                            <label class="form-label">Descripción</label>
+                            <textarea class="form-control" name="descripcion" rows="3"></textarea>
+                        </div>
+
+                        <div class="col-md-6">
+                            <label class="form-label">Imagen URL</label>
+                            <input type="text" class="form-control" name="imagenUrl">
+                        </div>
+
+                        <div class="col-md-6">
+                            <label class="form-label">Subcategoría</label>
+                            <input type="text" class="form-control" name="subcategoria">
+                        </div>
+
+                        <!-- Podés agregar más campos como especificaciones, size, etc. -->
+
+                        <div class="col-12 text-end mt-4">
+                            <a href="/admin/productos" class="btn btn-outline-secondary">Cancelar</a>
+                            <button type="submit" class="btn btn-success">Guardar</button>
+                        </div>
+
+                    </div>
+                </form>
+
+            </div>
+        </div>
+    </div>
+</section>
+
+<div th:insert="~{fragments/footer :: footer}"></div>
+
+<!-- Scripts -->
+<script th:src="@{/assets/js/jquery-1.11.0.min.js}"></script>
+<script th:src="@{/assets/js/bootstrap.bundle.min.js}"></script>
+
+</body>
+</html>
