@@ -35,11 +35,26 @@
                                 <td th:text="${producto.categoria}">Sin categoría</td>
                                 <td>
                                     <div class="d-flex gap-2 justify-content-center">
-                                        <a th:href="@{/admin/productos/editar/{id}(id=${producto.id})}" class="btn btn-sm btn-outline-success">Editar</a>
-                                        <form th:action="@{/admin/productos/eliminar/{id}(id=${producto.id})}" method="post" onsubmit="return confirm('¿Eliminar este producto?');">
-                                            <button type="submit" class="btn btn-sm btn-outline-danger">Eliminar</button>
+                                        <form th:action="@{/admin/productos/editar/{id}(id=${producto.id})}"
+                                              method="get"
+                                              class="m-0 p-0">
+                                            <button type="submit"
+                                                    class="btn btn-outline-success btn-sm px-3 py-1">
+                                                Editar
+                                            </button>
+                                        </form>
+
+                                        <form th:action="@{/admin/productos/eliminar/{id}(id=${producto.id})}"
+                                              method="post"
+                                              onsubmit="return confirm('¿Eliminar este producto?');"
+                                              class="m-0 p-0">
+                                            <button type="submit"
+                                                    class="btn btn-outline-danger btn-sm px-3 py-1">
+                                                Eliminar
+                                            </button>
                                         </form>
                                     </div>
+
                                 </td>
                             </tr>
                             </tbody>
