@@ -15,5 +15,4 @@ public interface ProductoService {
     List<Producto> listarTodos();
     void guardar(Producto producto);
 
-
 }

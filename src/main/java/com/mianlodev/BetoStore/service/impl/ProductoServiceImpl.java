@@ -27,10 +27,6 @@ public class ProductoServiceImpl implements ProductoService {
         return productoRepository.save(producto);
     }
 
-    @Override
-    public Producto obtenerPorId(Long id) {
-        return productoRepository.findById(id).orElse(null);
-    }
 
     @Override
     public void eliminarPorId(Long id) {
@@ -62,6 +58,11 @@ public class ProductoServiceImpl implements ProductoService {
         productoRepository.save(producto);
     }
 
+    @Override
+    public Producto obtenerPorId(Long id) {
+        return productoRepository.findById(id).orElseThrow(() ->
+                new IllegalArgumentException("Producto no encontrado con ID: " + id));
+    }
 
 
 }

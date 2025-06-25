@@ -9,6 +9,7 @@ import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
 import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.ModelAttribute;
+import org.springframework.web.bind.annotation.PathVariable;
 import org.springframework.web.bind.annotation.PostMapping;
 
 @Controller
@@ -53,6 +54,14 @@ public class AdminController {
     public String guardarProducto(@ModelAttribute Producto producto) {
         productoService.guardar(producto);
         return "redirect:/admin/productos";
+    }
+
+    @GetMapping("/admin/productos/editar/{id}")
+    public String editarProducto(@PathVariable Long id, Model model) {
+        Producto producto = productoService.obtenerPorId(id);
+        model.addAttribute("producto", producto);
+        model.addAttribute("items", cartService.obtenerCarrito());
+        return "admin/producto-formulario";
     }
 
 }

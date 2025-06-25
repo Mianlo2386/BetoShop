@@ -12,45 +12,60 @@
             <div class="card-body">
                 <h2 class="h2 mb-4 text-center">Nuevo Producto</h2>
 
-                <form th:action="@{/admin/productos/guardar}" method="post">
+                <form th:action="@{/admin/productos/guardar}" th:object="${producto}" method="post">
+                    <input type="hidden" th:field="*{id}"/>
+
                     <div class="row g-3">
 
                         <div class="col-md-6">
                             <label class="form-label">Nombre</label>
-                            <input type="text" class="form-control" name="nombre" required>
+                            <input type="text" th:field="*{nombre}" class="form-control" required>
                         </div>
 
                         <div class="col-md-6">
                             <label class="form-label">Precio</label>
-                            <input type="number" class="form-control" name="precio" step="0.01" required>
+                            <input type="number" th:field="*{precio}" class="form-control" step="0.01" required>
                         </div>
 
                         <div class="col-md-6">
                             <label class="form-label">Stock</label>
-                            <input type="number" class="form-control" name="stock" required>
+                            <input type="number" th:field="*{stock}" class="form-control" required>
                         </div>
 
                         <div class="col-md-6">
                             <label class="form-label">Categoría</label>
-                            <input type="text" class="form-control" name="categoria">
+                            <input type="text" th:field="*{categoria}" class="form-control">
                         </div>
 
                         <div class="col-12">
                             <label class="form-label">Descripción</label>
-                            <textarea class="form-control" name="descripcion" rows="3"></textarea>
+                            <textarea th:field="*{descripcion}" class="form-control" rows="3"></textarea>
                         </div>
 
                         <div class="col-md-6">
                             <label class="form-label">Imagen URL</label>
-                            <input type="text" class="form-control" name="imagenUrl">
+                            <input type="text" th:field="*{imagenUrl}" class="form-control">
                         </div>
 
                         <div class="col-md-6">
                             <label class="form-label">Subcategoría</label>
-                            <input type="text" class="form-control" name="subcategoria">
+                            <input type="text" th:field="*{subcategoria}" class="form-control">
                         </div>
 
-                        <!-- Podés agregar más campos como especificaciones, size, etc. -->
+                        <div class="col-12">
+                            <label class="form-label">Especificaciones</label>
+                            <textarea th:field="*{especificaciones}" class="form-control" rows="3"></textarea>
+                        </div>
+
+                        <div class="col-md-6">
+                            <label class="form-label">Tamaño</label>
+                            <input type="text" th:field="*{size}" class="form-control">
+                        </div>
+
+                        <div class="col-md-6">
+                            <label class="form-label">Estrellas</label>
+                            <input type="number" th:field="*{stars}" class="form-control" min="0" max="5">
+                        </div>
 
                         <div class="col-12 text-end mt-4">
                             <a href="/admin/productos" class="btn btn-outline-secondary">Cancelar</a>
