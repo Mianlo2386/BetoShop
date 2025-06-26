@@ -19,6 +19,7 @@
                             <thead class="table-success">
                             <tr>
                                 <th>ID</th>
+                                <th>Imagen</th>
                                 <th>Nombre</th>
                                 <th>Precio</th>
                                 <th>Stock</th>
@@ -29,6 +30,12 @@
                             <tbody>
                             <tr th:each="producto : ${products}">
                                 <td th:text="${producto.id}">1</td>
+                                <td>
+                                    <img th:src="${producto.imagenUrl}"
+                                         alt="Imagen de [[${producto.nombre}]]"
+                                         class="img-thumbnail"
+                                         style="max-width: 100px; height: auto;">
+                                </td>
                                 <td th:text="${producto.nombre}">Nombre</td>
                                 <td th:text="'$' + ${producto.precio}">100.00</td>
                                 <td th:text="${producto.stock}">5</td>
