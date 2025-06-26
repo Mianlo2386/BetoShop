@@ -69,6 +69,13 @@ public class Producto {
     @OneToMany(mappedBy = "producto", cascade = CascadeType.ALL)
     private List<ProductImage> imagenes = new ArrayList<>();
 
+    @PrePersist
+    public void asignarFechaCreacion() {
+        if (releaseDate == null) {
+            releaseDate = LocalDate.now();
+        }
+    }
+
 
 
 }
