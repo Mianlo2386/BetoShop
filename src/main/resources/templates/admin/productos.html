@@ -99,7 +99,7 @@
     </div>
 
 
-    <div th:if="${exito}" class="alert alert-success" th:text="${exito}"></div>
+    <!--<div th:if="${exito}" class="alert alert-success" th:text="${exito}"></div>-->
     <div th:if="${error}" class="alert alert-danger" th:text="${error}"></div>
 </section>
 
@@ -112,22 +112,21 @@
 <script th:src="@{/assets/js/templatemo.js}"></script>
 <script th:src="@{/assets/js/custom.js}"></script>
 <script th:src="@{/assets/js/carrousel.releases.js}"></script>
+<script th:src="@{/assets/js/toast.js}"></script>
 
-<script>
-    document.addEventListener('DOMContentLoaded', function () {
-      const toastElList = [].slice.call(document.querySelectorAll('.toast'));
-      const toastList = toastElList.map(function (toastEl) {
-        return new bootstrap.Toast(toastEl);
-      });
-      toastList.forEach(toast => toast.show());
-    });
-</script>
-
+<!-- Toast personalizado -->
 <div th:if="${exito}" class="toast-container position-fixed top-0 end-0 p-3" style="z-index: 1055">
-    <div class="toast align-items-center text-white bg-success border-0 show" role="alert" aria-live="assertive" aria-atomic="true">
+    <div class="toast align-items-center text-white bg-success border-0"
+         role="alert"
+         aria-live="assertive"
+         aria-atomic="true"
+         data-bs-autohide="true"
+         data-bs-delay="3000">
         <div class="d-flex">
             <div class="toast-body" th:text="${exito}">Producto eliminado correctamente.</div>
-            <button type="button" class="btn-close btn-close-white me-2 m-auto" data-bs-dismiss="toast" aria-label="Cerrar"></button>
+            <button type="button" class="btn-close btn-close-white me-2 m-auto"
+                    data-bs-dismiss="toast"
+                    aria-label="Cerrar"></button>
         </div>
     </div>
 </div>
