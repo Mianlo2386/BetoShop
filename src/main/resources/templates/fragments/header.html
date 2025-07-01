@@ -28,14 +28,21 @@
                 </ul>
             </div>
             <div class="navbar align-self-center d-flex">
-                <div class="d-lg-none flex-sm-fill mt-3 mb-4 col-7 col-sm-auto pr-3">
+                <!--<div class="d-lg-none flex-sm-fill mt-3 mb-4 col-7 col-sm-auto pr-3">
                     <div class="input-group">
                         <input type="text" class="form-control" id="inputMobileSearch" placeholder="Buscar ...">
                         <div class="input-group-text">
                             <i class="fa fa-fw fa-search"></i>
                         </div>
                     </div>
-                </div>
+                </div>-->
+                <!-- Ícono de lupa siempre visible -->
+                <a class="nav-icon position-relative text-decoration-none text-dark me-3"
+                   href="#"
+                   data-bs-toggle="modal"
+                   data-bs-target="#templatemo_search">
+                    <i class="fa fa-fw fa-search"></i>
+                </a>
                 <!-- Ícono de carrito  -->
                 <a class="nav-icon position-relative text-decoration-none" th:href="@{/cart}">
                     <i class="fa fa-fw fa-cart-arrow-down text-dark mr-1"></i>
