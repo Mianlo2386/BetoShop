@@ -1,6 +1,7 @@
 package com.mianlodev.BetoStore.controller;
 
 import com.mianlodev.BetoStore.model.Producto;
+import com.mianlodev.BetoStore.model.Usuario;
 import com.mianlodev.BetoStore.service.CartService;
 import com.mianlodev.BetoStore.service.ProductoService;
 import com.mianlodev.BetoStore.service.UsuarioService;
@@ -13,6 +14,8 @@ import org.springframework.web.bind.annotation.ModelAttribute;
 import org.springframework.web.bind.annotation.PathVariable;
 import org.springframework.web.bind.annotation.PostMapping;
 import org.springframework.web.servlet.mvc.support.RedirectAttributes;
+
+import java.util.List;
 
 @Controller
 public class AdminController {
@@ -39,11 +42,7 @@ public class AdminController {
         return "admin/productos";
     }
 
-    @GetMapping("/admin/usuarios")
-    public String gestionarUsuarios(Model model) {
-        model.addAttribute("usuarios", usuarioService.listarTodos());
-        return "admin/usuarios";
-    }
+
 
     @GetMapping("/admin/productos/nuevo")
     public String mostrarFormularioNuevo(Model model) {
@@ -75,5 +74,12 @@ public class AdminController {
             redirectAttributes.addFlashAttribute("error", "El producto ya no existe o fue eliminado.");
         }
         return "redirect:/admin/productos";
+    }
+    @GetMapping("/admin/usuarios")
+    public String listarUsuarios(Model model) {
+        List<Usuario> usuarios = usuarioService.listarTodos();
+        model.addAttribute("usuarios", usuarios);
+        model.addAttribute("items", cartService.obtenerCarrito());
+        return "admin/usuarios"; // Vista a crear
     }
 }
