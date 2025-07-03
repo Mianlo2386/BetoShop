@@ -11,6 +11,7 @@ import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 
 import java.util.List;
+import java.util.Optional;
 
 @Service
 public class UsuarioServiceImpl implements UsuarioService {
@@ -25,21 +26,26 @@ public class UsuarioServiceImpl implements UsuarioService {
 
     @Override
     public Usuario registrarUsuario(Usuario usuario) {
-        // Encriptar la contraseña
         String encodedPassword = passwordEncoder.encode(usuario.getPassword());
-
-        // Usar logger en lugar de System.out.println
         logger.info(">>> Contraseña encriptada: {}", encodedPassword);
-
-        // Guardar usuario con la contraseña encriptada
         usuario.setPassword(encodedPassword);
         usuario.getRoles().add("ROLE_USER");
-
         return usuarioRepository.save(usuario);
     }
+
     @Override
     public List<Usuario> listarTodos() {
         return usuarioRepository.findAll();
     }
 
+    @Override
+    public Optional<Usuario> buscarPorEmail(String email) {
+        return usuarioRepository.findByEmail(email);
+    }
+    @Override
+    public void actualizarPassword(Usuario usuario, String nuevaPassword) {
+        String encoded = passwordEncoder.encode(nuevaPassword);
+        usuario.setPassword(encoded);
+        usuarioRepository.save(usuario);
+    }
 }
