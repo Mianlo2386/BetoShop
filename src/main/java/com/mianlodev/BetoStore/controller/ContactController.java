@@ -10,6 +10,9 @@ import org.springframework.ui.Model;
 import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.PostMapping;
 import org.springframework.web.bind.annotation.RequestParam;
+import java.io.UnsupportedEncodingException;
+
+
 
 import jakarta.mail.MessagingException;
 import jakarta.mail.internet.MimeMessage;
@@ -35,7 +38,7 @@ public class ContactController {
             @RequestParam String email,
             @RequestParam String subject,
             @RequestParam String message,
-            Model model) {  // 🔥 Agregamos el modelo
+            Model model) {
         try {
             // ---- PRIMER CORREO: envío a mí mismo ----
             MimeMessage mail = mailSender.createMimeMessage();
@@ -51,20 +54,33 @@ public class ContactController {
             MimeMessage confirmationMail = mailSender.createMimeMessage();
             MimeMessageHelper confirmationHelper = new MimeMessageHelper(confirmationMail, true);
 
-            confirmationHelper.setTo(email); // correo del usuario
-            confirmationHelper.setSubject("Gracias por contactarnos");
-            confirmationHelper.setText("Hola " + name + ",\n\n"
-                    + "Gracias por comunicarte con nosotros. Hemos recibido tu mensaje y te contactaremos a la brevedad.\n\n"
-                    + "Saludos,\n"
-                    + "El equipo de BetoStore.");
+            confirmationHelper.setTo(email);
+            confirmationHelper.setSubject("Gracias por contactarte con el equipo de BetoStore");
+            confirmationHelper.setFrom("no-reply@betostore.com", "Equipo de BetoStore");
+
+            String respuestaHtml = """
+            <html>
+            <body style="font-family: Arial, sans-serif; background-color: #f4f4f4; padding: 20px;">
+                <div style="background-color: #fff; padding: 20px; border-radius: 8px;">
+                    <h2 style="color: #28a745;">¡Gracias por contactarnos, %s!</h2>
+                    <p>Hemos recibido tu mensaje y te responderemos a la brevedad.</p>
+                    <p>Mientras tanto, podés visitar nuestro sitio o seguirnos en redes.</p>
+                    <p style="margin-top: 30px;">Saludos,<br><strong>El equipo de BetoStore</strong></p>
+                    <hr>
+                    <p style="font-size: 12px; color: #888;">Este correo fue generado automáticamente. No respondas a este mensaje.</p>
+                </div>
+            </body>
+            </html>
+            """.formatted(name);
+
+            confirmationHelper.setText(respuestaHtml, true);
 
             mailSender.send(confirmationMail);
 
-            // 🔥 Agregamos `items` al modelo antes de redirigir
             model.addAttribute("items", cartService.obtenerCarrito());
 
             return "redirect:/contact?success=true";
-        } catch (MessagingException e) {
+        } catch (MessagingException | UnsupportedEncodingException e) {
             e.printStackTrace();
             return "redirect:/contact?error=true";
         }
