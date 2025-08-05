@@ -65,7 +65,9 @@
                 <div class="navbar align-self-center d-flex">
                     <!-- Ícono de logout si el usuario está logueado -->
                     <a th:if="${#authentication.principal != null and #authentication.principal != 'anonymousUser'}"
-                       th:href="@{/logout}"
+                       href="#"
+                       id="logout-icon"
+                       title="Cerrar sesión"
                        class="nav-icon position-relative text-decoration-none text-success">
                         <i class="fa fa-fw fa-user mr-3"></i>
                     </a>
@@ -73,6 +75,7 @@
                     <!-- Ícono de login si el usuario no está logueado -->
                     <a th:if="${#authentication.principal == null or #authentication.principal == 'anonymousUser'}"
                        th:href="@{/login}"
+                       title="Iniciar sesión"
                        class="nav-icon position-relative text-decoration-none text-dark">
                         <i class="fa fa-fw fa-user mr-3"></i>
                     </a>
