@@ -4,7 +4,7 @@ document.addEventListener("DOMContentLoaded", function () {
         logoutIcon.addEventListener("click", function (e) {
             e.preventDefault();
             Swal.fire({
-                title: '⚠️ ¿Cerrar sesión?',
+                title: '¿Cerrar sesión?',
 
 
                 html: `
